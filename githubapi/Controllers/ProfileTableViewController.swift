@@ -80,12 +80,6 @@ class ProfileTableViewController: UITableViewController {
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
         
-        let secItemClasses =  [kSecClassGenericPassword, kSecClassInternetPassword, kSecClassCertificate, kSecClassKey, kSecClassIdentity]
-        for itemClass in secItemClasses {
-            let spec: NSDictionary = [kSecClass: itemClass]
-            SecItemDelete(spec)
-        }
-        
         hideInfo()
         
     }
@@ -95,14 +89,21 @@ class ProfileTableViewController: UITableViewController {
 extension ProfileTableViewController {
     
     func hideInfo(){
+        
+        let secItemClasses =  [kSecClassGenericPassword, kSecClassInternetPassword, kSecClassCertificate, kSecClassKey, kSecClassIdentity]
+        for itemClass in secItemClasses {
+            let spec: NSDictionary = [kSecClass: itemClass]
+            SecItemDelete(spec)
+        }
+        
+        Model.Login.removeToken()
+        
         loginButton.isEnabled = true
         loginButton.title = "Login"
         
         tableView.backgroundView = messageLabel;
-        
-        UserDefaults.standard.removeObject(forKey: "token")
-        
         tableView.reloadData()
+        
     }
     
     func updateInfo(for user: User){
