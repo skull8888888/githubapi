@@ -15,8 +15,6 @@ class TableViewController: UITableViewController {
         static let cellIdentifier = "Cell"
         static let title = "Repo search"
         static let cellSpacing: CGFloat = 10.0
-        
-        static let perPage: Int = 30
     }
     
     var repos: [Repo] = []
@@ -81,10 +79,6 @@ extension TableViewController {
 }
 
 extension TableViewController {
-        
-    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        
-    }
         
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section == self.repos.count - 1 {
